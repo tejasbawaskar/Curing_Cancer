@@ -1,0 +1,17 @@
+reset;
+model Q_4_1.mod;
+option solver cplex;
+data Q_4_1.dat;
+
+solve;
+
+#display solution
+display X;
+display total_dosage;
+
+#print the output
+print {k in ROWS} :{h in COLUMNS}   sum {i in MATS} X[i] * matrix_value[i,k,h] > Q_4_1_new.out;
+
+#print the max dosage
+print max {(k,h) in critical_area} sum {i in MATS} X[i] * matrix_value[i,k,h];
+
