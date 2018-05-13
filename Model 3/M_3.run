@@ -1,0 +1,13 @@
+reset;
+model Q_3.mod;
+option solver cplex;
+data Q_3.dat;
+
+solve;
+
+#display the solution
+display X;
+display total;
+
+#print the output matrix
+print {m in ROWS} :{n in COLUMNS}   sum {i in MATS} X[i] * target_value[i,m,n] > Q_3.out;
